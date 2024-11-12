@@ -2,6 +2,7 @@ import configparser
 import pyodbc
 import sys
 import pandas as pd
+import numpy as np
 
 # Carregar o arquivo config.ini
 config = configparser.ConfigParser()
@@ -32,6 +33,8 @@ def extratogeral(cnpj):
         conn = pyodbc.connect(connection_string)
         query = f"SELECT * FROM Cte WHERE totalnf <> 0 AND cnpj_transp = '{cnpj}' "
         extrato = pd.read_sql(query, conn)
+    #Criar duas colunas a mais no extrato ("Eu tenho que parar de inventar essas parada")
+        extrato['% Conforme combinado'] = np.where (extrato['porcnf']<2.5,'Conforme','Verificar')
         return extrato
     except pyodbc.Error as e:
         print(f"Erro ao conectar ao banco de dados: {e}")
@@ -57,7 +60,7 @@ def relatorio():
     dftrz = extratogeral(cnpjtrz)
 
     # Salvar os dados no Excel
-    with pd.ExcelWriter(r'Extrato/RelatorioEX.xlsx', engine='xlsxwriter') as writer:
+    with pd.ExcelWriter(r'Extrato/RelatorioEX1.xlsx', engine='xlsxwriter') as writer:
         # HelpLog
         dfhpl.to_excel(writer, sheet_name=f'Help Log', index=False)
 
@@ -74,6 +77,10 @@ def relatorio():
         dftrz.to_excel(writer, sheet_name=f'TRZ', index=False)
 
         print('Dados extraídos com sucesso.')
+        
+        
+
+        
 
 # Chamando a função main apenas quando o script for executado diretamente
 if __name__ == "__main__":
