@@ -1,0 +1,11 @@
+12% do valor da NF sempre
+
+Exemplo
+
+Uma NF de 10.549,69 com peso de 336,960
+
+Pedagio: 11,44
+Até 100 KG: 48,97
+Peso excedente: 116,21 (que seria 236,960 KG x 0,49044)
+Ad. Valor : 0,35% Sobre o valor da NF: 36,92
+Gris:0,15% Sobre o valor da NF: 15,82 + ICMS, o frete ficaria R$ 260,63
