@@ -1,5 +1,6 @@
 import pyodbc
 import configparser
+from servicos.conexaobd import*
 
 def motohelp():
     config = configparser.ConfigParser()

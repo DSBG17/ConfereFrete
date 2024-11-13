@@ -31,8 +31,30 @@ def extratogeral(cnpj):
     try:
         # Estabelecer conexão com o banco de dados
         conn = pyodbc.connect(connection_string)
-        query = f"""SELECT transportadora,cnpj_transp,valorfre,valortotal,totalnf,pesonf,fretecalc,emissao,numerocte,porcnf 
-        FROM Cte WHERE totalnf <> 0 AND cnpj_transp = '{cnpj}' """
+        query = f"""
+    SELECT 
+    Cte.transportadora,
+    Cte.cnpj_transp,
+    Cte.estado_dest,
+    Cte.valorfre,
+    Cte.valortotal,
+    Cte.totalnf,
+    Cte.pesonf,
+    Cte.fretecalc,
+    Cte.emissao,
+    Cte.numerocte,
+    Cte.porcnf,
+    Nfe.numeronf  -- Adicionando o campo numeronf da tabela Nfe
+    FROM 
+    Cte
+    JOIN 
+    Nfe 
+    ON Cte.id = Nfe.id  -- Ajuste o campo 'id' se necessário para corresponder ao campo correto de junção
+    WHERE 
+    Cte.totalnf <> 0 
+    AND Cte.cnpj_transp = '{cnpj}'
+        """
+
         extrato = pd.read_sql(query, conn)
     #Criar duas colunas a mais no extrato ("Eu tenho que parar de inventar essas parada")
         extrato['% Conforme combinado'] = np.where (extrato['porcnf']<2.5,'Conforme','Verificar')
