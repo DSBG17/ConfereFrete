@@ -44,12 +44,12 @@ def extratogeral(cnpj):
     Cte.emissao,
     Cte.numerocte,
     Cte.porcnf,
-    Nfe.numeronf  -- Adicionando o campo numeronf da tabela Nfe
+    Nfe.numeronf
     FROM 
     Cte
     JOIN 
     Nfe 
-    ON Cte.id = Nfe.id  -- Ajuste o campo 'id' se necessário para corresponder ao campo correto de junção
+    ON Cte.id = Nfe.id 
     WHERE 
     Cte.totalnf <> 0 
     AND Cte.cnpj_transp = '{cnpj}'
