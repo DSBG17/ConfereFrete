@@ -57,7 +57,7 @@ def extratogeral(cnpj):
 
         extrato = pd.read_sql(query, conn)
     #Criar duas colunas a mais no extrato ("Eu tenho que parar de inventar essas parada")
-        extrato['% Conforme combinado'] = np.where (extrato['porcnf']<2.5,'Conforme','Verificar')
+        extrato['% Conforme combinado'] = np.where (extrato['porcnf']<2.5,'Enviar para pagamento','Verificar')
         return extrato
     except pyodbc.Error as e:
         print(f"Erro ao conectar ao banco de dados: {e}")
