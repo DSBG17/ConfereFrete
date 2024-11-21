@@ -65,3 +65,23 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+#listra ul
+{
+    list-style: none ;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#listra button
+{
+    
+    border-radius: 10%;
+}
+#listra ul a
+{
+    text-decoration: none;
+}
+#listra ul li:houver
+{
+    color: #333;
+}
