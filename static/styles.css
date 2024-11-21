@@ -9,7 +9,7 @@ body {
 
 /* Cabeçalho */
 header {
-    background-color: #ff0000; /* Vermelho */
+    background: url('fator.png');
     color: #d3d3d3; /* Cinza mais escuro */
     padding: 20px;
     text-align: center;
@@ -44,9 +44,9 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    background-color: #ff0000; /* Vermelho */
-    color: #d3d3d3; /* Cinza mais escuro */
-    border-radius: 4px;
+  
+    color: #ffffff; /* Cinza mais escuro */
+    
 }
 
 /* Conteúdo principal */
