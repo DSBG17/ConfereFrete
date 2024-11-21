@@ -1,0 +1,67 @@
+/* Estilo global */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #d3d3d3; /* Cinza mais escuro */
+    color: #333;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #ff0000; /* Vermelho */
+    color: #d3d3d3; /* Cinza mais escuro */
+    padding: 20px;
+    text-align: center;
+}
+
+/* Menu de navegação */
+nav {
+    background-color: #d3d3d3; /* Cinza mais escuro */
+    border-top: 4px solid #ff0000; /* Vermelho */
+    border-bottom: 4px solid #ff0000; /* Vermelho */
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #ff0000; /* Vermelho */
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #ff0000; /* Vermelho */
+    color: #d3d3d3; /* Cinza mais escuro */
+    border-radius: 4px;
+}
+
+/* Conteúdo principal */
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Rodapé */
+footer {
+    background-color: #ff0000; /* Vermelho */
+    color: #d3d3d3; /* Cinza mais escuro */
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
