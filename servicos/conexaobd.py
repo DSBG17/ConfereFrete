@@ -1,30 +1,51 @@
-import pyodbc
+"""Um arquivo para criar uma conexão ao banco, para pode utilizar em todos os arquivos como class,
+ficando um codigo mais limpo"""
 import configparser
-import sys
+import pyodbc
 
 
-def conexao():
-    config = configparser.ConfigParser()
+class conection_:
+    def __init__(self, config_file='../config.ini'):
 
-    # Verifica se o arquivo config.ini foi carregado corretamente
-    if not config.read('config.ini'):
-        print("Arquivo config.ini não encontrado ou não pôde ser lido.")
-        return
+        self.config = configparser.ConfigParser()
+        self.config.read(config_file)
 
-    # Verifica se a seção 'database' está presente
-    if 'database' not in config:
-        print("Seção 'database' não encontrada em config.ini.")
-        return
+        self.server = self.config.get('database', 'server')
+        self.database = self.config.get('database', 'database')
+        self.username = self.config.get('database', 'username')
+        self.password = self.config.get('database', 'password')
+        self.driver = self.config.get('database', 'driver', fallback="{ODBC Driver 17 for SQL Server}")
 
-    server = config['database']['server']
-    database = config['database']['database']
-    username = config['database']['username']
-    password = config['database']['password']
+        self.connection = None
 
-    connection_string = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}'
+    def conexao(self):
+        try:
+            self.connection = pyodbc.connect(
+                f'DRIVER = {self.driver};'
+                f'SERVER = {self.server};'
+                f'DATABASE = {self.database};'
+                f'UID = {self.username};'
+                f'PWD = {self.password};'
+                'timeout=30'
+            )
+            print('Conexão bem sucedida !')
+        except pyodbc.Error as e:
+            print(f'Erro ao conectar ao banco de dados: {e}')
 
- # Cria a conexão
-    print("Tentando conectar ao banco de dados...")
-    conn = pyodbc.connect(connection_string)
-    cursor = conn.cursor()
-    print("Conexão bem-sucedida.")
+    """def disconnect(self):
+        if self.connection:
+            self.connection.close()
+            print('Conexão fechada.')
+        else:
+            print('Nenhuma conexão ativa para fechar.')
+
+    def execute_query(self, query, params=None):
+
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute(query, params or ())
+            results = cursor.fetchall()
+            return results
+        except pyodbc.Error as e:
+            print(f'Erro ao executar consulta: {e}')
+            return None"""
