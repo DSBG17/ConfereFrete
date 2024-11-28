@@ -96,7 +96,7 @@ def enviar_para_banco(resultados):
     config = configparser.ConfigParser()
 
     # Verifica se o arquivo config.ini foi carregado corretamente
-    if not config.read('../config.ini'):
+    if not config.read('config.ini'):
         print("Arquivo config.ini não encontrado ou não pôde ser lido.")
         return
 

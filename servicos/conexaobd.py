@@ -31,8 +31,8 @@ class conection_:
             print('Conexão bem sucedida !')
         except pyodbc.Error as e:
             print(f'Erro ao conectar ao banco de dados: {e}')
-
-    """def disconnect(self):
+  
+    def disconnect(self):
         if self.connection:
             self.connection.close()
             print('Conexão fechada.')
@@ -48,4 +48,4 @@ class conection_:
             return results
         except pyodbc.Error as e:
             print(f'Erro ao executar consulta: {e}')
-            return None"""
+            return None
