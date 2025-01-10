@@ -4,48 +4,39 @@ import configparser
 import pyodbc
 
 
-class conection_:
-    def __init__(self, config_file='../config.ini'):
+def conexaobanco():
+    config = configparser.ConfigParser()
+    config.read('../config.ini')
+    
+    server = config['database']['server']
+    database = config['database']['database']
+    username = config['database']['username']
+    password = config['database']['password']
 
-        self.config = configparser.ConfigParser()
-        self.config.read(config_file)
 
-        self.server = self.config.get('database', 'server')
-        self.database = self.config.get('database', 'database')
-        self.username = self.config.get('database', 'username')
-        self.password = self.config.get('database', 'password')
-        self.driver = self.config.get('database', 'driver', fallback="{ODBC Driver 17 for SQL Server}")
 
-        self.connection = None
+    
+    conn_string = (
+        #f"DRIVER = {{ODBC Driver 18 for SQL Server}};"
+        f"SERVER = {server};"
+        f"DATABASE = {database};"
+        f"UID = {username};"
+        f"PWD = {password};"
+    )
 
-    def conexao(self):
-        try:
-            self.connection = pyodbc.connect(
-                f'DRIVER = {self.driver};'
-                f'SERVER = {self.server};'
-                f'DATABASE = {self.database};'
-                f'UID = {self.username};'
-                f'PWD = {self.password};'
-                'timeout=30'
-            )
-            print('Conexão bem sucedida !')
-        except pyodbc.Error as e:
-            print(f'Erro ao conectar ao banco de dados: {e}')
-  
-    def disconnect(self):
-        if self.connection:
-            self.connection.close()
-            print('Conexão fechada.')
-        else:
-            print('Nenhuma conexão ativa para fechar.')
 
-    def execute_query(self, query, params=None):
 
-        try:
-            cursor = self.connection.cursor()
-            cursor.execute(query, params or ())
-            results = cursor.fetchall()
-            return results
-        except pyodbc.Error as e:
-            print(f'Erro ao executar consulta: {e}')
-            return None
+    try:
+        conn = pyodbc.connect(conn_string)
+        print('Conexão bem-sucedida')
+
+        print(f"Server: {server}")
+        print(f"Database: {database}")
+        print(f"Username: {username}")
+        print(f"Password: {password}")
+
+    except pyodbc.Error as e:
+        print('Erro ao conectar', e)
+
+
+conexaobanco()
