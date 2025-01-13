@@ -1,6 +1,5 @@
-import sys
-sys.path.append(r'c:/Users/Davi Santos/Desktop/ConformeF/ConfereFrete')
-from servicos.conexaobd import *
+from Banco.servidor import Conexaobanco
 
-conexaobanco()
- 
+teste = Conexaobanco()
+
+print(teste.conexao)
