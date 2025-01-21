@@ -1,5 +1,15 @@
 from Banco.servidor import Conexaobanco
 
-teste = Conexaobanco()
+banco = Conexaobanco()
 
-print(teste.conexao)
+servidor = 'SERVIDORFRETE'
+usuario = 'Mestre1'
+password = 'S-45678'
+database = 'Frete'
+drive = 'ODBC Driver 17 for SQL Server'
+
+
+
+
+
+print(banco.conecta(driver=drive,server=servidor,database=database,user=usuario,password=password))
