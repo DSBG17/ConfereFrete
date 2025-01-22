@@ -1,6 +1,15 @@
-import sys
-sys.path.append(r'c:/Users/Davi Santos/Desktop/ConformeF/ConfereFrete')
-from servicos.conexaobd import *
+from Banco.servidor import Conexaobanco
 
-conexaobanco()
- 
+banco = Conexaobanco()
+
+servidor = 'SERVIDORFRETE'
+usuario = 'Mestre1'
+password = 'S-45678'
+database = 'Frete'
+drive = 'ODBC Driver 17 for SQL Server'
+
+
+
+
+
+print(banco.conecta(driver=drive,server=servidor,database=database,user=usuario,password=password))
